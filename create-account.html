@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8">
+		<title>Create Account page</title>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="/static/ca.css">
+		<script language="javascript">
+			function show()
+			{
+				var uname = document.getElementById("name").value;
+				var pwd = document.getElementById("pwd").value;
+				var email = document.getElementById("email").value;
+				var no = document.getElementById("no").value;
+				if(uname==''){
+					alert("username-missing")
+					return false;
+				}
+				else if(pwd.length==''||pwd.length < 6)
+				{
+					alert("Password min length is 6.");
+					return false;
+				}
+				else if(email=='')
+				{
+					alert("Email is missing");
+					return false;
+				}
+				else if(no=='')
+				{
+					alert("Mobile No is missing");
+					return false;
+				}
+				return true;
+				
+
+			}
+		</script>
+	</head>
+	
+	<body>
+	
+		<div style="text-align: center;background-image:linear-gradient(135deg, #d8ca0b 10%, #1904E5 100%);">
+			
+				<h1 style="font-size: 500%;">Signup</h1>
+				
+				<div >
+					<!-- <a href="/static/i3.html">Login</a> -->
+					{%- for category, message in get_flashed_messages(with_categories = true) %}
+					<div class = "alert alert-danger">
+					<p style="color: rgb(235, 17, 17);font-size:larger;">{{ message }}</p>
+
+					</div>
+					{%- endfor %}
+					<br>
+					<br>
+					<form  action="signup" method="POST" name="myform" onSubmit="return show()">
+						
+						<p><input style="font-size: larger;border-radius: 10px;" type="text" name="name" id="name"placeholder=" Name"></p>
+						<p><input style="font-size: larger;border-radius: 10px" type="password" name="pwd" id="pwd"placeholder=" Password"></p>
+						<p><input style="font-size: larger;border-radius: 10px" type="text" name="email" id="email"placeholder=" Email-id"></p>
+						<p><input style="font-size: larger;border-radius: 10px" type="number" name="no" id="no"placeholder=" Mobile No"></p>
+						<br>
+						<p><button>Create</button></p>
+					</form>
+				
+				</div>
+					
+				<br>
+					
+				<div class="remember-me--forget-password">
+						
+					<label>
+		
+						<span>Keep your credentials safe...😊</span>
+					</label>
+					
+				</div>
+					
+					
+					
+			</div>
+			
+		</div>
+	
+	</body>
+
+</html>

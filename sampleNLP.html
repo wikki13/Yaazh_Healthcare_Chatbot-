@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot page</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body style="background-image: url(/static/robomoving_2.gif);background-size: auto;
+  background-repeat:no-repeat;overflow: scroll;background-attachment: fixed;">
+    <h1 style="color: white;"></h1>
+    <div>
+      <div style="padding-left: 10px;width: 5%;float:right">
+        <form action="logout"> <button id="logout" style="float: right;"><img src="/static/logout2.png" width="30px" height= "30px" ></button></form>
+       </div> 
+
+      <div id="chatbox"  class="overlay">
+       
+        <p class="botText" id="greetText"><span style="text-transform: capitalize;">Hello {{name}}, I'm Alexa</span></p>
+
+      </div>
+      <div id="userInput"  class="overlay">
+        <input id="textInput" type="text" name="msg" placeholder="Message" autofocus>
+        <input id="buttonInput" type="submit" value="Send">
+      </div>
+      
+      <script>
+        function greetings() 
+            {
+            // var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            data="Hello {{name}}, I am Alexa. your healthcare chatbot. Happy to help you!"
+            var voices = [];
+            voices = window.speechSynthesis.getVoices();
+            var msg1 = new SpeechSynthesisUtterance();
+            msg1.text = data;
+            msg1.voice = voices[2];
+            window.speechSynthesis.speak(msg1);
+        }
+
+        function getBotResponse() 
+        {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get", { msg: rawText }).done
+          (
+            function(data) 
+            {
+            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            var voices = [];
+            voices = window.speechSynthesis.getVoices();
+            var msg1 = new SpeechSynthesisUtterance();
+            msg1.text = data;
+            msg1.voice = voices[0];
+            window.speechSynthesis.speak(msg1);
+
+            
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            }
+          
+            );
+        }
+        
+      
+        greetings();
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+
+          getBotResponse();
+          
+        })
+      </script>
+    </div>
+   
+    
+  </body>
+</html>

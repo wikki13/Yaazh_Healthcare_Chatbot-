@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/static/s2.css">
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script language="javascript">
+
+	function show()
+	{
+		var uname = document.getElementById("name").value;
+		var pwd = document.getElementById("pwd").value;
+		if(uname==''){
+			alert("username-missing")
+			return false;
+		}
+		else if(pwd.length==''||pwd.length < 6)
+		{
+			alert("Password min length is 6.");
+			return false;
+		}
+
+		return true;
+	
+	}
+</script>
+
+</head>
+<body>
+
+<div class="box-form" >
+	<div class="left" style="background-image: url(/static/logo_robo.gif);background-size: 300px ;background-position:left;
+	background-repeat: no-repeat;overflow: hidden;">
+		<div class="overlay">
+		<h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Yaazh</h1>
+		<l> </l>
+		<h2><i style="color: black;">Happy to chat with you !</i></h2>
+		<br></br>
+		<br></br>
+		<span>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<p style="font-size:18px;color: black;">Follow us on social media</p>
+			<a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+			<a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+			
+		</span>
+		</div>
+	</div>
+	
+	
+		<div class="right">
+		<h5 style="text-align: center;">Login</h5>
+		<p style="font-size:20px;color: black;">Don't you have an account? <a href="signup" style="color: blue;">Create Your Account </a><br></p>
+		
+		{%- for category, message in get_flashed_messages(with_categories = true) %}
+		<div class = "alert alert-danger">
+		   <p style=" color: red;font-size: large;">{{ message }}</p>
+		</div>
+	 {%- endfor %}
+
+		<form action="login" method="POST" name="myform" onSubmit="return show()">
+			<div class="inputs">
+				<input style="font-size: larger;border-radius: 50px;background-image: linear-gradient(280deg,rgb(85, 224, 85) 10%,yellow);text-align: center;" type="text"id="name" placeholder=" Enter your user name :-)" name="name">
+			
+				<input style="font-size: larger;border-radius: 50px;background-image: linear-gradient(280deg,yellow 10%,rgb(85, 224, 85));text-align: center;" type="password" id="pwd"placeholder=" Enter your password :-)" name="pwd">
+			</div>
+			<br>
+			
+
+			<div>
+				<p style="font-size:18px;color: black;"><a  href="forget" style="color: blue;">forgot password?</a></p>
+				<button style="font-size:20px;">Signin</button></div>
+		</form>
+		
+			<br>
+			<!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			<script>
+			  function onSignIn(googleUser) {
+				// Useful data for your client-side scripts:
+				var profile = googleUser.getBasicProfile();
+				console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+				console.log('Full Name: ' + profile.getName());
+				console.log('Given Name: ' + profile.getGivenName());
+				console.log('Family Name: ' + profile.getFamilyName());
+				console.log("Image URL: " + profile.getImageUrl());
+				console.log("Email: " + profile.getEmail());
+			
+				// The ID token you need to pass to your backend:
+				var id_token = googleUser.getAuthResponse().id_token;
+				console.log("ID Token: " + id_token);
+			  }
+			</script>  -->
+			
+	</div>
+	
+</div>
+<!-- partial -->
+
+</body>
+</html>
